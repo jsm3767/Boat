@@ -39,7 +39,7 @@ public class MoveCameraToNextShip : MonoBehaviour
         playerShips[currentIndex].GetComponentInChildren<Canvas>().enabled = true;
 
         //start coroutine move camera
-        StartCoroutine(SmoothCameraMove(.2f, new Vector3(playerShips[currentIndex].transform.position.x, 5.0f, playerShips[currentIndex].transform.position.z + zOffset)));
+        StartCoroutine(SmoothCameraMove(.3f, new Vector3(playerShips[currentIndex].transform.position.x, 5.0f, playerShips[currentIndex].transform.position.z + zOffset)));
         
     }
 
