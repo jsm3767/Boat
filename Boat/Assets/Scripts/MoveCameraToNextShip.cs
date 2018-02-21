@@ -12,7 +12,7 @@ public class MoveCameraToNextShip : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        playerShips = GameObject.FindGameObjectsWithTag("PlayerShip");
+        playerShips = GameObject.FindGameObjectsWithTag("Ship");
     }
 
     // Update is called once per frame
