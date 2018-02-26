@@ -8,7 +8,8 @@ public class GameManager : Singleton<GameManager>
 
     private GameObject selectedShip;
 
-    private List<GameObject> ships;
+    private List<GameObject> shipsObj;
+    private List<Ship> ships;
     public GameObject SelectedShip
     {
         get { return selectedShip; }
@@ -18,12 +19,20 @@ public class GameManager : Singleton<GameManager>
     // Use this for initialization
     void Start()
     {
-        ships = new List<GameObject>(GameObject.FindGameObjectsWithTag("Ship"));
+        shipsObj = new List<GameObject>(GameObject.FindGameObjectsWithTag("Ship"));
     }
 
     // Update is called once per frame
     void Update()
     {
 
+    }
+
+    public void NextTurn()
+    {
+        foreach(GameObject ship in shipsObj)
+        {
+            ship.GetComponent<Ship>().PlayTurn();
+        }
     }
 }
