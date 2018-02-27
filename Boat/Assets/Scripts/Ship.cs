@@ -89,14 +89,7 @@ public class Ship : MonoBehaviour
         while( t < 1 )
         {
             t += Time.deltaTime * (Time.timeScale / TurnPlaySpeed);
-<<<<<<< HEAD
             transform.position = Vector3.Lerp( startLocation, startLocation + ( transform.forward * speedMultiplier * baseSpeed ) , Mathf.SmoothStep(0.0f,1, t ) );
-=======
-            if (t > 0.5)
-            {
-                transform.position = Vector3.Lerp(startLocation, startLocation + (transform.forward * speedMultiplier), Mathf.SmoothStep(0.0f, 1, (t - 0.5f) * 2));
-            }
->>>>>>> 5e6df1c89b2a02798c0f499904fa89fdf2ad86de
             yield return 0;
         }
 
@@ -135,17 +128,13 @@ public class Ship : MonoBehaviour
 
         Quaternion originalRotation = transform.rotation;
 
-<<<<<<< HEAD
         //t < X where X=1 will take turnplayspeed time 
         while( t < 1 )
-=======
-        while( t < 0.5 )
->>>>>>> 5e6df1c89b2a02798c0f499904fa89fdf2ad86de
         {
             t += Time.deltaTime * ( Time.timeScale / TurnPlaySpeed );
             //45*t * multiplier degrees
             transform.rotation = originalRotation;
-            transform.Rotate( Vector3.up * 90.0f * Mathf.SmoothStep( 0.0f, 1, t*2 ) * speedMultiplier, Space.World );
+            transform.Rotate( Vector3.up * 45.0f * Mathf.SmoothStep( 0.0f, 1, t ) * speedMultiplier, Space.World );
             yield return 0;
         }
     }
@@ -256,12 +245,6 @@ public class Ship : MonoBehaviour
         TestCalculation();
 
         PlayTurn();
-    }
-
-    private void Update()
-    {
-        turnDirection = (TurnDirection)Random.Range(0, 4);
-        shipSpeed = (ShipSpeed)Random.Range(-1, 2);
     }
 
 
