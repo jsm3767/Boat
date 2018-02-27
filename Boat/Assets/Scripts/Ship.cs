@@ -137,6 +137,9 @@ public class Ship : MonoBehaviour
             transform.Rotate( Vector3.up * 45.0f * Mathf.SmoothStep( 0.0f, 1, t ) * speedMultiplier, Space.World );
             yield return 0;
         }
+
+
+        StartCoroutine( MoveForward() );
     }
 
     Vector3 TestCalculation()
@@ -228,7 +231,6 @@ public class Ship : MonoBehaviour
     {
 
         StartCoroutine( Rotate() );
-        StartCoroutine( MoveForward() );
         //StartCoroutine( Fire() );
     }
 
