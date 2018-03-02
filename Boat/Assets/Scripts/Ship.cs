@@ -144,91 +144,13 @@ public class Ship : MonoBehaviour
 
     Vector3 TestCalculation()
     {
-        Vector3 result = new Vector3();
-        Transform initial = new GameObject().transform;
-        initial.position = transform.position;
-        initial.rotation = transform.rotation;
-        
-        float speedMultiplier = 0.0f;
-
-        switch( shipSpeed )
-        {
-            case ShipSpeed.None:
-                speedMultiplier = 0.0f;
-                break;
-            case ShipSpeed.HalfMast:
-                speedMultiplier = 1.0f;
-                break;
-            case ShipSpeed.FullMast:
-                speedMultiplier = 2.0f;
-                break;
-        }
-
-        float turnSpeedMultiplier = 0.0f;
-
-        switch( turnDirection )
-        {
-            case TurnDirection._45L:
-                turnSpeedMultiplier = -1.0f;
-                break;
-            case TurnDirection._90L:
-                turnSpeedMultiplier = -2.0f;
-                break;
-            case TurnDirection._45R:
-                turnSpeedMultiplier = 1.0f;
-                break;
-            case TurnDirection._90R:
-                turnSpeedMultiplier = 2.0f;
-                break;
-            case TurnDirection.None:
-                break;
-        }
-
-        turnSpeedMultiplier *= Time.timeScale / TurnPlaySpeed;
-
-        Quaternion originalRotation = transform.rotation;
-
-        //t < X where X=1 will take turnplayspeed time 
-
-
-        if( turnDirection == TurnDirection.None)
-        {
-            result = initial.position + ( initial.forward * speedMultiplier * baseSpeed );
-        }
-        else if( shipSpeed == ShipSpeed.None)
-        {
-            result = initial.position;
-        }
-        else
-        {
-            Vector3 startLocation = initial.position;
-
-            float t0 = 0.0f;
-            float t1 = 0.0f;
-
-            while( t0 < 1 )
-            {
-                t0 += Time.deltaTime * ( Time.timeScale / TurnPlaySpeed );
-                //45*t * multiplier degrees
-                initial.rotation = originalRotation;
-                initial.Rotate( Vector3.up * 45.0f * Mathf.SmoothStep( 0.0f, 1, t0 ) * speedMultiplier, Space.World );
-
-                t1 += Time.deltaTime * ( Time.timeScale / TurnPlaySpeed );
-                initial.position = Vector3.Lerp( startLocation, startLocation + ( initial.forward * speedMultiplier * baseSpeed ), Mathf.SmoothStep( 0.0f, 1, t1 ) );
-            }
-            result = initial.position;
-
-        }
-        
-        Debug.Log( result.x );
-        
-        Debug.Log( result.z );
-
-        return result;
+        return new Vector3();
     }
 
     public void PlayTurn()
     {
+        //example usage of gamemanager
+        //GameManager.Instance.SelectedShip
 
         StartCoroutine( Rotate() );
         //StartCoroutine( Fire() );
@@ -244,7 +166,7 @@ public class Ship : MonoBehaviour
 
         Debug.Log( turnDirection );
 
-        TestCalculation();
+        //TestCalculation();
 
         PlayTurn();
     }

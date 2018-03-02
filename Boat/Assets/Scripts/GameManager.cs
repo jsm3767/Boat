@@ -6,9 +6,11 @@ public class GameManager : Singleton<GameManager>
 {
     protected GameManager() { }
 
+    [SerializeField]
     private GameObject selectedShip;
 
     private List<GameObject> ships;
+
     public GameObject SelectedShip
     {
         get { return selectedShip; }
@@ -24,6 +26,9 @@ public class GameManager : Singleton<GameManager>
     // Update is called once per frame
     void Update()
     {
-
+        foreach(GameObject ship in ships)
+        {
+            ship.SendMessage("Playturn");
+        }
     }
 }
