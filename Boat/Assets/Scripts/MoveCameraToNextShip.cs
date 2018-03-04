@@ -6,14 +6,11 @@ using UnityEngine;
 //Get currentShip from gameManager
 public class MoveCameraToNextShip : MonoBehaviour
 {
-    private GameObject[] playerShips;
-    private GameObject currentShip = null;
-    private float zOffset = -2.3f; //puts camera in a better Z position to see the ship/UI
+
 
     // Use this for initialization
     void Start()
     {
-        playerShips = GameObject.FindGameObjectsWithTag("Ship");
     }
 
     // Update is called once per frame
@@ -22,26 +19,29 @@ public class MoveCameraToNextShip : MonoBehaviour
     {
         int currentIndex = 0;
 
-        if (currentShip != null)
+        if (GameManager.Instance.SelectedShip != null)
         {
-            currentShip.GetComponentInChildren<Canvas>().enabled = false;
-
-            for ( int index = 0; index < playerShips.Length; index++ )
+            GameManager.Instance.SelectedShip.GetComponentInChildren<Canvas>().enabled = false;
+            
+            for ( int index = 0; index < GameManager.Instance.PlayerShips.Count; index++ )
             {
-                if (playerShips[index].GetInstanceID() == currentShip.GetInstanceID())
+                if (GameManager.Instance.PlayerShips[index].GetInstanceID() == GameManager.Instance.SelectedShip.GetInstanceID())
                 {
                     currentIndex = index;
                 }
             }
             
-            currentIndex = (currentIndex + 1) % playerShips.Length;
+            currentIndex = (currentIndex + 1) % GameManager.Instance.PlayerShips.Count;
         }
 
-        currentShip = playerShips[currentIndex];
-        playerShips[currentIndex].GetComponentInChildren<Canvas>().enabled = true;
+        GameManager.Instance.SelectedShip = GameManager.Instance.PlayerShips[currentIndex];
+        GameManager.Instance.PlayerShips[currentIndex].GetComponentInChildren<Canvas>().enabled = true;
 
         //start coroutine move camera
-        StartCoroutine(SmoothCameraMove(.3f, new Vector3(playerShips[currentIndex].transform.position.x, GameManager.Instance.CameraCurrentZoom, playerShips[currentIndex].transform.position.z + zOffset)));
+        StartCoroutine(SmoothCameraMove(.3f, 
+            new Vector3(GameManager.Instance.PlayerShips[currentIndex].transform.position.x, 
+            GameManager.Instance.CameraCurrentZoom, 
+            GameManager.Instance.PlayerShips[currentIndex].transform.position.z + GameManager.Instance.MoveToShipCameraZOffset)));
         
     }
 
