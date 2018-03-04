@@ -9,7 +9,7 @@ public class ShipHealth : MonoBehaviour
 
     public int Health
     {
-        get;
+        get { return health; }
     }
     // Use this for initialization
     void Start()

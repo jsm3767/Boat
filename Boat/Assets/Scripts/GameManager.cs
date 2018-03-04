@@ -11,6 +11,15 @@ public class GameManager : Singleton<GameManager>
 
     private List<GameObject> ships;
 
+    private float cameraMaxZoom;
+    private float cameraMinZoom;
+    private float cameraCurrentZoom = 4.0f;
+
+    public float CameraCurrentZoom
+    {
+        get { return cameraCurrentZoom; }
+    }
+
     public GameObject SelectedShip
     {
         get { return selectedShip; }
@@ -26,9 +35,14 @@ public class GameManager : Singleton<GameManager>
     // Update is called once per frame
     void Update()
     {
-        foreach(GameObject ship in ships)
+      
+    }
+
+    public void DoTurn()
+    {
+        foreach (GameObject ship in ships)
         {
-            ship.SendMessage("Playturn");
+            ship.SendMessage("PlayTurn");
         }
     }
 }

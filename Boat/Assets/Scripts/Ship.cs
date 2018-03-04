@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -42,6 +43,8 @@ public class Ship : MonoBehaviour
     protected float TurnPlaySpeed = 2.0f; //In seconds, move to gamemanager
 
     protected float baseSpeed = 2.0f;
+
+
 
     public bool HasActions
     {
@@ -93,6 +96,16 @@ public class Ship : MonoBehaviour
             yield return 0;
         }
 
+        ResetShip();
+
+    }
+
+    //Called after moving forward and rotating
+    private void ResetShip()
+    {
+        shipSpeed = ShipSpeed.None;
+        loadedCannon = LoadedCannon.None;
+        turnDirection = TurnDirection.None;
     }
 
     IEnumerator Rotate()
@@ -109,16 +122,16 @@ public class Ship : MonoBehaviour
         switch( turnDirection )
         {
             case TurnDirection._45L:
-                speedMultiplier = -1.0f;
-                break;
-            case TurnDirection._90L:
                 speedMultiplier = -2.0f;
                 break;
+            case TurnDirection._90L:
+                speedMultiplier = -4.0f;
+                break;
             case TurnDirection._45R:
-                speedMultiplier = 1.0f;
+                speedMultiplier = 2.0f;
                 break;
             case TurnDirection._90R:
-                speedMultiplier = 2.0f;
+                speedMultiplier = 4.0f;
                 break;
             case TurnDirection.None:
                 break;
@@ -158,18 +171,33 @@ public class Ship : MonoBehaviour
 
     private void Start()
     {
-        //Debug
-        //turnDirection = (TurnDirection)Random.Range(0,4);
-        turnDirection = TurnDirection._45L;
-        //shipSpeed = (ShipSpeed)Random.Range( -1, 2 );
-        shipSpeed = ShipSpeed.FullMast;
+        //TODO: remove
+        //Debug testing things
 
-        Debug.Log( turnDirection );
+
+        //turnDirection = (TurnDirection)Random.Range(0,4);
+        //turnDirection = TurnDirection._45L;
+        //shipSpeed = (ShipSpeed)Random.Range( -1, 2 );
+        //shipSpeed = ShipSpeed.FullMast;
+
+        //Debug.Log( turnDirection );
 
         //TestCalculation();
 
-        PlayTurn();
+        //PlayTurn();
     }
 
+    public void SetTurnDirection(string direction)
+    {
+        turnDirection = (TurnDirection)System.Enum.Parse(typeof(TurnDirection),direction);
+    }
+    public void SetLoadedCannon(string cannon)
+    {
+        loadedCannon = (LoadedCannon)System.Enum.Parse(typeof(LoadedCannon), cannon);
+    }
+    public void SetShipSpeed(string speed)
+    {
+        shipSpeed = (ShipSpeed)System.Enum.Parse(typeof(ShipSpeed), speed); 
+    }
 
 }

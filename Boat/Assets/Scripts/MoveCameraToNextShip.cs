@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//move to gamemanager
 //Get currentShip from gameManager
 public class MoveCameraToNextShip : MonoBehaviour
 {
     private GameObject[] playerShips;
     private GameObject currentShip = null;
-    private float zOffset = -2.3f;
+    private float zOffset = -2.3f; //puts camera in a better Z position to see the ship/UI
 
     // Use this for initialization
     void Start()
@@ -20,6 +21,7 @@ public class MoveCameraToNextShip : MonoBehaviour
     public void GoToNext()
     {
         int currentIndex = 0;
+
         if (currentShip != null)
         {
             currentShip.GetComponentInChildren<Canvas>().enabled = false;
@@ -39,7 +41,7 @@ public class MoveCameraToNextShip : MonoBehaviour
         playerShips[currentIndex].GetComponentInChildren<Canvas>().enabled = true;
 
         //start coroutine move camera
-        StartCoroutine(SmoothCameraMove(.3f, new Vector3(playerShips[currentIndex].transform.position.x, 5.0f, playerShips[currentIndex].transform.position.z + zOffset)));
+        StartCoroutine(SmoothCameraMove(.3f, new Vector3(playerShips[currentIndex].transform.position.x, GameManager.Instance.CameraCurrentZoom, playerShips[currentIndex].transform.position.z + zOffset)));
         
     }
 

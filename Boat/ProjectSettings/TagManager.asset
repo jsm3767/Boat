@@ -6,6 +6,8 @@ TagManager:
   tags:
   - PlayerShip
   - Ship
+  - CanvasButtons
+  - CanvasIcons
   layers:
   - Default
   - TransparentFX
