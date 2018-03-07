@@ -9,7 +9,7 @@ public class EnemyShip : Ship {
 
 	// Use this for initialization
 	void Start () {
-		playerShipsOBJ = GameObject.FindGameObjectsWithTag ("Player");
+		playerShipsOBJ =new List<GameObject>( GameObject.FindGameObjectsWithTag ("Player"));
 	}
 	
 	// Update is called once per frame
