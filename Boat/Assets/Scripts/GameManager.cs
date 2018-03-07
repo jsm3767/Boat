@@ -61,7 +61,7 @@ public class GameManager : Singleton<GameManager>
     // Use this for initialization
     void Start()
     {
-        playerShips = new List<GameObject>(GameObject.FindGameObjectsWithTag("Ship"));
+        playerShips = new List<GameObject>(GameObject.FindGameObjectsWithTag("Player"));
         shipButtons = new List<GameObject>(GameObject.FindGameObjectsWithTag("CanvasButtons"));
     }
 
