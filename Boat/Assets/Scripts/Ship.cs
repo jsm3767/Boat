@@ -44,7 +44,7 @@ public class Ship : MonoBehaviour
 
     protected float baseSpeed = 2.0f;
 
-
+    protected float shootRange = 10.0f;
 
     public bool HasActions
     {
@@ -157,10 +157,10 @@ public class Ship : MonoBehaviour
 
     Vector3 TestCalculation()
     {
-        return new Vector3();
+        throw new NotImplementedException();
     }
 
-    public void PlayTurn()
+    protected virtual void PlayTurn()
     {
         //example usage of gamemanager
         //GameManager.Instance.SelectedShip
@@ -171,9 +171,7 @@ public class Ship : MonoBehaviour
 
     private void Start()
     {
-        //TODO: remove
         //Debug testing things
-
 
         //turnDirection = (TurnDirection)Random.Range(0,4);
         //turnDirection = TurnDirection._45L;
@@ -187,6 +185,8 @@ public class Ship : MonoBehaviour
         //PlayTurn();
     }
 
+    //Considering making playership an extension of ship and putting this stuff in it
+    //Not sure if it would make a big difference yet though
     public void SetTurnDirection(string direction)
     {
         turnDirection = (TurnDirection)System.Enum.Parse(typeof(TurnDirection),direction);

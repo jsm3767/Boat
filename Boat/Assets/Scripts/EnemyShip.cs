@@ -14,17 +14,20 @@ public class EnemyShip : Ship {
 		turnDirection = TurnDirection.None;
 		shipSpeed = ShipSpeed.FullMast;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		// Find Closest Player
-		closestPlayer = findClosestPlayer ();
 
-		// CHeck if they are within range for cannon attack this turn
-		shootTurn = false;
-		if (Vector3.Distance (closestPlayer.transform.position, this.transform.position) < 4) {
-			shootTurn = true;
-		}
+    //If I'm correct we don't have to recalculate every frame so just moved this to playturn instead of 
+    //having it in update. does base.PlayTurn after calculating
+    protected override void PlayTurn()
+    {
+        // Find Closest Player
+        closestPlayer = findClosestPlayer();
+
+        // CHeck if they are within range for cannon attack this turn
+        shootTurn = false;
+        if (Vector3.Distance(closestPlayer.transform.position, this.transform.position) < 4)
+        {
+            shootTurn = true;
+        }
 
         // yes - fire
 
@@ -41,7 +44,7 @@ public class EnemyShip : Ship {
         //now dtermine what side it's on.
         float angleToRight = Mathf.Acos(Vector3.Dot(this.transform.right, toTarget) / toTarget.magnitude);
         Debug.Log(angleToRight * Mathf.Rad2Deg);
-        if (angleToRight*Mathf.Rad2Deg < 90)
+        if (angleToRight * Mathf.Rad2Deg < 90)
         {
             Debug.Log("on the right side");
             if (Mathf.Rad2Deg * angle < 90)
@@ -55,7 +58,7 @@ public class EnemyShip : Ship {
         }
         else
         {
-            if(Mathf.Rad2Deg * angle < 90)
+            if (Mathf.Rad2Deg * angle < 90)
             {
                 turnDirection = TurnDirection._45L;
             }
@@ -68,13 +71,23 @@ public class EnemyShip : Ship {
         {
             turnDirection = TurnDirection.None;
             shipSpeed = ShipSpeed.FullMast;
-        }else if(Mathf.Rad2Deg *angle > 90){
+        }
+        else if (Mathf.Rad2Deg * angle > 90)
+        {
             shipSpeed = ShipSpeed.None;
         }
         else
         {
             shipSpeed = ShipSpeed.HalfMast;
         }
+
+
+        base.PlayTurn();
+    }
+
+    // Update is called once per frame
+    void Update () {
+	
     }
 
     private GameObject findClosestPlayer(){
