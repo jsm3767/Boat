@@ -538,6 +538,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 837d4c7f663c89645aab8630cb2a57a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnParent: {fileID: 777990609}
   BasicEnemy: {fileID: 1411259468334670, guid: f57eb1b14d84a7841b6b3c0d0469475b, type: 2}
 --- !u!1 &777990609
 GameObject:
