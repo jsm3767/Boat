@@ -43,8 +43,8 @@ public class Ship : MonoBehaviour
     protected float TurnPlaySpeed = 2.0f; //In seconds, move to gamemanager
 
     protected float baseSpeed = 2.0f;
-
-    protected float shootRange = 10.0f;
+    public Collider leftCollider;
+    public Collider rightCollider;
 
     public bool HasActions
     {
@@ -68,6 +68,7 @@ public class Ship : MonoBehaviour
     {
         if(shipSpeed == ShipSpeed.None)
         {
+            ResetShip();
             yield break;
         }
 
@@ -103,15 +104,19 @@ public class Ship : MonoBehaviour
     //Called after moving forward and rotating
     private void ResetShip()
     {
+        Debug.Log(loadedCannon);
         shipSpeed = ShipSpeed.None;
         loadedCannon = LoadedCannon.None;
         turnDirection = TurnDirection.None;
+        rightCollider.enabled = false;
+        leftCollider.enabled = false;
     }
 
     IEnumerator Rotate()
     {
         if( turnDirection == TurnDirection.None)
         {
+            StartCoroutine(MoveForward());
             yield break;
         }
 
@@ -155,23 +160,51 @@ public class Ship : MonoBehaviour
         StartCoroutine( MoveForward() );
     }
 
-    Vector3 TestCalculation()
+    IEnumerator Fire()
     {
-        throw new NotImplementedException();
+        if(loadedCannon == LoadedCannon.None)
+        {
+            rightCollider.enabled = false;
+            leftCollider.enabled = false;
+            yield break;
+        }
+        switch (loadedCannon)
+        {
+            case LoadedCannon.Left:
+                rightCollider.enabled = false;
+                leftCollider.enabled = true;
+                break;
+            case LoadedCannon.Right:
+                rightCollider.enabled = true;
+                leftCollider.enabled = false;
+                break;
+            case LoadedCannon.None:
+                rightCollider.enabled = false;
+                leftCollider.enabled = false;
+                break;
+        }
+
+        StartCoroutine(Rotate());
     }
 
-    protected virtual void PlayTurn()
+    Vector3 TestCalculation()
+    {
+        return new Vector3();
+    }
+
+    public void PlayTurn()
     {
         //example usage of gamemanager
         //GameManager.Instance.SelectedShip
-
-        StartCoroutine( Rotate() );
-        //StartCoroutine( Fire() );
+        StartCoroutine(Fire());
+        
     }
 
     private void Start()
     {
+        //TODO: remove
         //Debug testing things
+
 
         //turnDirection = (TurnDirection)Random.Range(0,4);
         //turnDirection = TurnDirection._45L;
@@ -185,8 +218,6 @@ public class Ship : MonoBehaviour
         //PlayTurn();
     }
 
-    //Considering making playership an extension of ship and putting this stuff in it
-    //Not sure if it would make a big difference yet though
     public void SetTurnDirection(string direction)
     {
         turnDirection = (TurnDirection)System.Enum.Parse(typeof(TurnDirection),direction);
@@ -198,6 +229,12 @@ public class Ship : MonoBehaviour
     public void SetShipSpeed(string speed)
     {
         shipSpeed = (ShipSpeed)System.Enum.Parse(typeof(ShipSpeed), speed); 
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "Enemy")
+           Debug.Log("test");
     }
 
 }

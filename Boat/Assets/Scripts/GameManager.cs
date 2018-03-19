@@ -13,7 +13,6 @@ public class GameManager : Singleton<GameManager>
     //private GameObject[] playerShipsIcons;
 
     private List<GameObject> playerShips;
-    private List<GameObject> enemyShips;
 
     private float cameraMaxZoom;
     private float cameraMinZoom;
@@ -63,7 +62,6 @@ public class GameManager : Singleton<GameManager>
     void Start()
     {
         playerShips = new List<GameObject>(GameObject.FindGameObjectsWithTag("Player"));
-        enemyShips = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));
         shipButtons = new List<GameObject>(GameObject.FindGameObjectsWithTag("CanvasButtons"));
     }
 
@@ -76,10 +74,6 @@ public class GameManager : Singleton<GameManager>
     public void DoTurn()
     {
         foreach (GameObject ship in playerShips)
-        {
-            ship.SendMessage("PlayTurn");
-        }
-        foreach (GameObject ship in enemyShips)
         {
             ship.SendMessage("PlayTurn");
         }
