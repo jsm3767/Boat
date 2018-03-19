@@ -64,7 +64,7 @@ public class Ship : MonoBehaviour
     }
 
     //Movement/attack functions
-    IEnumerator MoveForward()
+    protected IEnumerator MoveForward()
     {
         if(shipSpeed == ShipSpeed.None)
         {
@@ -108,49 +108,46 @@ public class Ship : MonoBehaviour
         turnDirection = TurnDirection.None;
     }
 
-    IEnumerator Rotate()
+    protected IEnumerator Rotate()
     {
-        if( turnDirection == TurnDirection.None)
+        if( turnDirection != TurnDirection.None)
         {
-            yield break;
+            float t = 0.0f;
+
+            float speedMultiplier = 0.0f;
+
+            switch (turnDirection)
+            {
+                case TurnDirection._45L:
+                    speedMultiplier = -2.0f;
+                    break;
+                case TurnDirection._90L:
+                    speedMultiplier = -4.0f;
+                    break;
+                case TurnDirection._45R:
+                    speedMultiplier = 2.0f;
+                    break;
+                case TurnDirection._90R:
+                    speedMultiplier = 4.0f;
+                    break;
+                case TurnDirection.None:
+                    break;
+            }
+
+            speedMultiplier *= Time.timeScale / TurnPlaySpeed;
+
+            Quaternion originalRotation = transform.rotation;
+
+            //t < X where X=1 will take turnplayspeed time 
+            while (t < 1)
+            {
+                t += Time.deltaTime * (Time.timeScale / TurnPlaySpeed);
+                //45*t * multiplier degrees
+                transform.rotation = originalRotation;
+                transform.Rotate(Vector3.up * 45.0f * Mathf.SmoothStep(0.0f, 1, t) * speedMultiplier, Space.World);
+                yield return 0;
+            }
         }
-
-        float t = 0.0f;
-
-        float speedMultiplier = 0.0f;
-
-        switch( turnDirection )
-        {
-            case TurnDirection._45L:
-                speedMultiplier = -2.0f;
-                break;
-            case TurnDirection._90L:
-                speedMultiplier = -4.0f;
-                break;
-            case TurnDirection._45R:
-                speedMultiplier = 2.0f;
-                break;
-            case TurnDirection._90R:
-                speedMultiplier = 4.0f;
-                break;
-            case TurnDirection.None:
-                break;
-        }
-
-        speedMultiplier *= Time.timeScale / TurnPlaySpeed;
-
-        Quaternion originalRotation = transform.rotation;
-
-        //t < X where X=1 will take turnplayspeed time 
-        while( t < 1 )
-        {
-            t += Time.deltaTime * ( Time.timeScale / TurnPlaySpeed );
-            //45*t * multiplier degrees
-            transform.rotation = originalRotation;
-            transform.Rotate( Vector3.up * 45.0f * Mathf.SmoothStep( 0.0f, 1, t ) * speedMultiplier, Space.World );
-            yield return 0;
-        }
-
 
         StartCoroutine( MoveForward() );
     }

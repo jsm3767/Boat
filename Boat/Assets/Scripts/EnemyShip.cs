@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyShip : Ship {
 
 	private GameObject[] playerShipsOBJ;
-	private GameObject closestPlayer;
+	public GameObject closestPlayer;
 	private bool shootTurn = false;
 
 	// Use this for initialization
@@ -43,10 +43,8 @@ public class EnemyShip : Ship {
         //Debug.Log(Mathf.Rad2Deg*angle);
         //now dtermine what side it's on.
         float angleToRight = Mathf.Acos(Vector3.Dot(this.transform.right, toTarget) / toTarget.magnitude);
-        Debug.Log(angleToRight * Mathf.Rad2Deg);
         if (angleToRight * Mathf.Rad2Deg < 90)
         {
-            Debug.Log("on the right side");
             if (Mathf.Rad2Deg * angle < 90)
             {
                 turnDirection = TurnDirection._45R;
@@ -70,19 +68,21 @@ public class EnemyShip : Ship {
         if (Mathf.Rad2Deg * angle < 45)
         {
             turnDirection = TurnDirection.None;
-            shipSpeed = ShipSpeed.FullMast;
-        }
-        else if (Mathf.Rad2Deg * angle > 90)
-        {
-            shipSpeed = ShipSpeed.None;
+            if (shootTurn)
+            {
+                shipSpeed = ShipSpeed.HalfMast;
+            }
+            else
+            {
+                shipSpeed = ShipSpeed.FullMast;
+            }            
         }
         else
         {
             shipSpeed = ShipSpeed.HalfMast;
         }
 
-
-        base.PlayTurn();
+        StartCoroutine(Rotate());
     }
 
     // Update is called once per frame

@@ -109,6 +109,8 @@ NavMeshSettings:
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
+    debug:
+      m_Flags: 0
   m_NavMeshData: {fileID: 0}
 --- !u!1 &3117297
 GameObject:
@@ -135,7 +137,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 3117297}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -251.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1943814066}
@@ -241,7 +243,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4722379216499538, guid: f57eb1b14d84a7841b6b3c0d0469475b, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -2.71
+      value: 0.81
       objectReference: {fileID: 0}
     - target: {fileID: 4722379216499538, guid: f57eb1b14d84a7841b6b3c0d0469475b, type: 2}
       propertyPath: m_LocalPosition.y
@@ -249,7 +251,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4722379216499538, guid: f57eb1b14d84a7841b6b3c0d0469475b, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -1.13
+      value: -3.46
       objectReference: {fileID: 0}
     - target: {fileID: 4722379216499538, guid: f57eb1b14d84a7841b6b3c0d0469475b, type: 2}
       propertyPath: m_LocalRotation.x
@@ -758,8 +760,8 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1054084422}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 550.5, y: 316.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1337463496}
   - {fileID: 3117298}
@@ -839,7 +841,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
-  m_StereoMirrorMode: 0
 --- !u!4 &1080868062
 Transform:
   m_ObjectHideFlags: 0
@@ -891,6 +892,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -906,6 +908,7 @@ MeshRenderer:
   m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -941,7 +944,7 @@ Transform:
   m_GameObject: {fileID: 1198304725}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -1.0167103, y: 0, z: 3.9215512}
-  m_LocalScale: {x: 25, y: 0.032547418, z: 25}
+  m_LocalScale: {x: 250, y: 0.032547418, z: 250}
   m_Children: []
   m_Father: {fileID: 1639887770}
   m_RootOrder: 1
@@ -972,7 +975,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1337463495}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 399.9, y: -219.69998, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 251901353}
