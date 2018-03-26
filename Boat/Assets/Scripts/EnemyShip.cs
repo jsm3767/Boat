@@ -2,33 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyShip : Ship {
+public class EnemyShip : Ship
+{
 
-	private GameObject[] playerShipsOBJ;
-	public GameObject closestPlayer;
-	private bool shootTurn = false;
+    private GameObject[] playerShipsOBJ;
+    public GameObject closestPlayer;
+    private bool shootTurn = false;
 
-	// Use this for initialization
-	void Start () {
-		playerShipsOBJ = GameObject.FindGameObjectsWithTag ("Player");
-		turnDirection = TurnDirection.None;
-		shipSpeed = ShipSpeed.FullMast;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		// Find Closest Player
-		closestPlayer = findClosestPlayer ();
+    // Use this for initialization
+    void Start()
+    {
+        playerShipsOBJ = GameObject.FindGameObjectsWithTag("Player");
+        turnDirection = TurnDirection.None;
+        shipSpeed = ShipSpeed.FullMast;
+    }
 
-		// CHeck if they are within range for cannon attack this turn
-		shootTurn = false;
-		if (Vector3.Distance (closestPlayer.transform.position, this.transform.position) < 4) {
-			shootTurn = true;
-		}
-
-<<<<<<< HEAD
-		// yes - fire
-=======
     //If I'm correct we don't have to recalculate every frame so just moved this to playturn instead of 
     //having it in update. does base.PlayTurn after calculating
     protected override void PlayTurn()
@@ -89,7 +77,7 @@ public class EnemyShip : Ship {
             else
             {
                 shipSpeed = ShipSpeed.FullMast;
-            }            
+            }
         }
         else
         {
@@ -98,23 +86,25 @@ public class EnemyShip : Ship {
 
         StartCoroutine(Rotate());
     }
->>>>>>> 6aa448c555a90e4254d8b317a796864763520473
 
-		// Change direction to front of player and figure out what side to fire on
-			// only turn if angle to player is more than turn amount.
-			// ie angle < 45 no turn
-				// angle > 45 but < 90 turn 45
-	}
+    // Update is called once per frame
+    void Update()
+    {
 
-	private GameObject findClosestPlayer(){
-		float dist = float.MaxValue;
-		GameObject closest = null;
-		foreach (GameObject g in playerShipsOBJ) {
-			if (Vector3.Distance (g.transform.position, this.transform.position) < dist) {
-				dist = Vector3.Distance (g.transform.position, this.transform.position);
-				closest = g;
-			}
-		}
-		return closest;
-	}
+    }
+
+    private GameObject findClosestPlayer()
+    {
+        float dist = float.MaxValue;
+        GameObject closest = null;
+        foreach (GameObject g in playerShipsOBJ)
+        {
+            if (Vector3.Distance(g.transform.position, this.transform.position) < dist)
+            {
+                dist = Vector3.Distance(g.transform.position, this.transform.position);
+                closest = g;
+            }
+        }
+        return closest;
+    }
 }

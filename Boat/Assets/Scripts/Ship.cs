@@ -50,9 +50,9 @@ public class Ship : MonoBehaviour
     {
         get
         {
-            if( turnDirection == TurnDirection.None
+            if (turnDirection == TurnDirection.None
                 && shipSpeed == ShipSpeed.None
-                && loadedCannon == LoadedCannon.None )
+                && loadedCannon == LoadedCannon.None)
             {
                 return false;
             }
@@ -66,7 +66,7 @@ public class Ship : MonoBehaviour
     //Movement/attack functions
     protected IEnumerator MoveForward()
     {
-        if(shipSpeed == ShipSpeed.None)
+        if (shipSpeed == ShipSpeed.None)
         {
             ResetShip();
             yield break;
@@ -76,7 +76,7 @@ public class Ship : MonoBehaviour
         Vector3 startLocation = transform.position;
         float speedMultiplier = 0.0f;
 
-        switch( shipSpeed )
+        switch (shipSpeed)
         {
             case ShipSpeed.None:
                 speedMultiplier = 0.0f;
@@ -88,12 +88,12 @@ public class Ship : MonoBehaviour
                 speedMultiplier = 2.0f;
                 break;
         }
-        
 
-        while( t < 1 )
+
+        while (t < 1)
         {
             t += Time.deltaTime * (Time.timeScale / TurnPlaySpeed);
-            transform.position = Vector3.Lerp( startLocation, startLocation + ( transform.forward * speedMultiplier * baseSpeed ) , Mathf.SmoothStep(0.0f,1, t ) );
+            transform.position = Vector3.Lerp(startLocation, startLocation + (transform.forward * speedMultiplier * baseSpeed), Mathf.SmoothStep(0.0f, 1, t));
             yield return 0;
         }
 
@@ -114,59 +114,55 @@ public class Ship : MonoBehaviour
 
     protected IEnumerator Rotate()
     {
-        if( turnDirection != TurnDirection.None)
+        if (turnDirection == TurnDirection.None)
         {
-<<<<<<< HEAD
             StartCoroutine(MoveForward());
             yield break;
         }
 
         float t = 0.0f;
-=======
-            float t = 0.0f;
->>>>>>> 6aa448c555a90e4254d8b317a796864763520473
 
-            float speedMultiplier = 0.0f;
+        float speedMultiplier = 0.0f;
 
-            switch (turnDirection)
-            {
-                case TurnDirection._45L:
-                    speedMultiplier = -2.0f;
-                    break;
-                case TurnDirection._90L:
-                    speedMultiplier = -4.0f;
-                    break;
-                case TurnDirection._45R:
-                    speedMultiplier = 2.0f;
-                    break;
-                case TurnDirection._90R:
-                    speedMultiplier = 4.0f;
-                    break;
-                case TurnDirection.None:
-                    break;
-            }
-
-            speedMultiplier *= Time.timeScale / TurnPlaySpeed;
-
-            Quaternion originalRotation = transform.rotation;
-
-            //t < X where X=1 will take turnplayspeed time 
-            while (t < 1)
-            {
-                t += Time.deltaTime * (Time.timeScale / TurnPlaySpeed);
-                //45*t * multiplier degrees
-                transform.rotation = originalRotation;
-                transform.Rotate(Vector3.up * 45.0f * Mathf.SmoothStep(0.0f, 1, t) * speedMultiplier, Space.World);
-                yield return 0;
-            }
+        switch (turnDirection)
+        {
+            case TurnDirection._45L:
+                speedMultiplier = -2.0f;
+                break;
+            case TurnDirection._90L:
+                speedMultiplier = -4.0f;
+                break;
+            case TurnDirection._45R:
+                speedMultiplier = 2.0f;
+                break;
+            case TurnDirection._90R:
+                speedMultiplier = 4.0f;
+                break;
+            case TurnDirection.None:
+                break;
         }
 
-        StartCoroutine( MoveForward() );
+        speedMultiplier *= Time.timeScale / TurnPlaySpeed;
+
+        Quaternion originalRotation = transform.rotation;
+
+        //t < X where X=1 will take turnplayspeed time 
+        while (t < 1)
+        {
+            t += Time.deltaTime * (Time.timeScale / TurnPlaySpeed);
+            //45*t * multiplier degrees
+            transform.rotation = originalRotation;
+            transform.Rotate(Vector3.up * 45.0f * Mathf.SmoothStep(0.0f, 1, t) * speedMultiplier, Space.World);
+            yield return 0;
+        }
+
+
+        StartCoroutine(MoveForward());
     }
 
-    IEnumerator Fire()
+    protected IEnumerator Fire()
     {
-        if(loadedCannon == LoadedCannon.None)
+        if (loadedCannon == LoadedCannon.None)
         {
             rightCollider.enabled = false;
             leftCollider.enabled = false;
@@ -196,12 +192,12 @@ public class Ship : MonoBehaviour
         return new Vector3();
     }
 
-    public void PlayTurn()
+    protected virtual void PlayTurn()
     {
         //example usage of gamemanager
         //GameManager.Instance.SelectedShip
         StartCoroutine(Fire());
-        
+
     }
 
     private void Start()
@@ -224,7 +220,7 @@ public class Ship : MonoBehaviour
 
     public void SetTurnDirection(string direction)
     {
-        turnDirection = (TurnDirection)System.Enum.Parse(typeof(TurnDirection),direction);
+        turnDirection = (TurnDirection)System.Enum.Parse(typeof(TurnDirection), direction);
     }
     public void SetLoadedCannon(string cannon)
     {
@@ -232,13 +228,13 @@ public class Ship : MonoBehaviour
     }
     public void SetShipSpeed(string speed)
     {
-        shipSpeed = (ShipSpeed)System.Enum.Parse(typeof(ShipSpeed), speed); 
+        shipSpeed = (ShipSpeed)System.Enum.Parse(typeof(ShipSpeed), speed);
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Enemy")
-           Debug.Log("test");
+        if (other.gameObject.tag == "Enemy")
+            Debug.Log("test");
     }
 
 }
