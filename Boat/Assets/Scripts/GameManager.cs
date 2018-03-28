@@ -63,12 +63,17 @@ public class GameManager : Singleton<GameManager>
     {
         playerShips = new List<GameObject>(GameObject.FindGameObjectsWithTag("Player"));
         shipButtons = new List<GameObject>(GameObject.FindGameObjectsWithTag("CanvasButtons"));
+        WaveManager.Instance.SpawnWave();
     }
 
     // Update is called once per frame
     void Update()
     {
-      
+        if(WaveManager.Instance.CountAliveShips() == 0 )
+        {
+            WaveManager.Instance.waveIndex++;
+            WaveManager.Instance.SpawnWave();
+        }
     }
 
     public void DoTurn()

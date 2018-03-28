@@ -38,7 +38,9 @@ public class WaveManager : Singleton<WaveManager>
     private Dictionary<EnemyType, GameObject> enemyDictionary;
 
     private Wave currentWave;
-    private int waveIndex = 1;
+    public int waveIndex = 1;
+
+    List<GameObject> enemyShips;
 
     private int currentWaveEnemyCount;
 
@@ -46,22 +48,25 @@ public class WaveManager : Singleton<WaveManager>
     {
         enemyDictionary = new Dictionary<EnemyType, GameObject>();
         enemyDictionary.Add(EnemyType.Basic, BasicEnemy);
-
-        WriteWave();
-        SpawnWave();
+        
     }
-                                                                            
+    
+    public int CountAliveShips()
+    {
+        return enemyShips.Count;
+    }
+
     //I think spawning everything at once is fine for this game
     public void SpawnWave()
     {
         LoadWaveFromJSON(waveIndex);
-
+        enemyShips = new List<GameObject>();
         for( int i = 0; i < currentWave.enemies.Length; i++)
         {
-            Instantiate(enemyDictionary[currentWave.enemies[i].enemyType],
+            enemyShips.Add(Instantiate(enemyDictionary[currentWave.enemies[i].enemyType],
                 new Vector3(currentWave.enemies[i].spawnPosition.x,.3f, currentWave.enemies[i].spawnPosition.y),
                 Quaternion.identity,
-                spawnParent.transform);
+                spawnParent.transform));
         }
         
     }
