@@ -53,8 +53,10 @@ public class WaveManager : Singleton<WaveManager>
     
     public int CountAliveShips()
     {
-        //return enemyShips.Count;
-        return 0;
+        if (enemyShips == null)
+            return -1;
+
+        return enemyShips.Count;
     }
 
     //I think spawning everything at once is fine for this game
@@ -102,5 +104,10 @@ public class WaveManager : Singleton<WaveManager>
             stream.Write(json);
         }
 
+    }
+
+    public void RemoveShip(GameObject reference)
+    {
+        //for( int index = 0; index)
     }
 }
