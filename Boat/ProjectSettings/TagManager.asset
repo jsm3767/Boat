@@ -10,6 +10,7 @@ TagManager:
   - CanvasIcons
   - Enemy
   - Selected
+  - GameManager
   layers:
   - Default
   - TransparentFX
