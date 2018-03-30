@@ -55,7 +55,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1411259468334670}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -9.633404, y: -1.0580161, z: 7.0803027}
+  m_LocalPosition: {x: 0.81, y: 0.3, z: -3.46}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4798472903513578}
@@ -125,7 +125,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1411259468334670}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.48862743, y: 1, z: 1}
@@ -137,11 +137,11 @@ BoxCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1411259468334670}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.2023468, y: 1, z: 1}
-  m_Center: {x: 0.8988266, y: 0, z: 0}
+  m_Size: {x: 1.8184199, y: 1, z: 1}
+  m_Center: {x: 1.2626863, y: 0, z: 0}
 --- !u!65 &65731570228822706
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -149,11 +149,11 @@ BoxCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1411259468334670}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.198555, y: 1, z: 1}
-  m_Center: {x: -0.9007225, y: 0, z: 0}
+  m_Size: {x: 1.8763852, y: 1, z: 1}
+  m_Center: {x: -1.2959187, y: 0, z: 0}
 --- !u!114 &114255889865770204
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -165,8 +165,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78fd65b5431cf984abc376fa1d9534f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftCollider: {fileID: 0}
-  rightCollider: {fileID: 0}
+  turnDirection: -1
+  shipSpeed: -1
+  loadedCannon: -1
+  leftCollider: {fileID: 65731570228822706}
+  rightCollider: {fileID: 65445184294508666}
+  turnsToReload: 0
+  health: 3
+  closestPlayer: {fileID: 0}
 --- !u!114 &114440297957213476
 MonoBehaviour:
   m_ObjectHideFlags: 1

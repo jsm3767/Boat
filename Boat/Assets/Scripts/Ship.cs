@@ -278,7 +278,7 @@ public class Ship : MonoBehaviour
 
     protected virtual void OnTriggerEnter(Collider other)
     {
-        if (turnsToReload == 0)
+        if (turnsToReload == 0 && !(loadedCannon == LoadedCannon.None))
         {
             if (other.gameObject.tag == "Enemy")
             {
@@ -305,7 +305,7 @@ public class Ship : MonoBehaviour
             t += Time.deltaTime * (Time.timeScale / TurnPlaySpeed);
             Vector3 startpos = gameObject.transform.position;
             Vector3 endpos = startpos;
-            endpos.y -= 3;
+            endpos.y -= 1;
             transform.position = Vector3.Lerp(startpos, endpos, Mathf.SmoothStep(0.0f, 1, t));
         }
     }
