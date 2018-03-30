@@ -33,8 +33,13 @@ public class MoveCameraToNextShip : MonoBehaviour
             
             currentIndex = (currentIndex + 1) % GameManager.Instance.PlayerShips.Count;
         }
+        //turn off previous
+        GameManager.Instance.SelectedShip.GetComponentInChildren<SelectionIndicator>().ToggleEnabled();
 
         GameManager.Instance.SelectedShip = GameManager.Instance.PlayerShips[currentIndex];
+
+        //turn on new
+        GameManager.Instance.SelectedShip.GetComponentInChildren<SelectionIndicator>().ToggleEnabled();
         GameManager.Instance.PlayerShips[currentIndex].GetComponentInChildren<Canvas>().enabled = true;
 
         //start coroutine move camera

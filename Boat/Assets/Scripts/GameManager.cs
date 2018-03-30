@@ -67,6 +67,10 @@ public class GameManager : Singleton<GameManager>
     {
         playerShips = new List<GameObject>(GameObject.FindGameObjectsWithTag("Player"));
 
+
+        selectedShip = playerShips[0];
+        selectedShip.GetComponentInChildren<SelectionIndicator>().ToggleEnabled();
+
         speedSlider.onValueChanged.AddListener(delegate {setSelectedShipSpeed((int)speedSlider.value); });
         directionSlider.onValueChanged.AddListener(delegate {setSelectedShipDirection((int)directionSlider.value); });
 
@@ -155,8 +159,10 @@ public class GameManager : Singleton<GameManager>
 
             currentIndex = (currentIndex + 1) % GameManager.Instance.PlayerShips.Count;
         }
-
+        //toggle old and new one
+        GameManager.Instance.SelectedShip.GetComponentInChildren<SelectionIndicator>().ToggleEnabled();
         GameManager.Instance.SelectedShip = GameManager.Instance.PlayerShips[currentIndex];
+        GameManager.Instance.SelectedShip.GetComponentInChildren<SelectionIndicator>().ToggleEnabled();
 
         //start coroutine move camera
         StartCoroutine(SmoothCameraMove(.3f,
