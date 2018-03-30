@@ -83,7 +83,8 @@ public class EnemyShip : Ship
         {
             shipSpeed = ShipSpeed.HalfMast;
         }
-
+        if (turnsToReload != 0)
+            turnsToReload--;
         StartCoroutine(Rotate());
     }
 
@@ -106,5 +107,18 @@ public class EnemyShip : Ship
             }
         }
         return closest;
+    }
+
+    protected override void OnTriggerEnter(Collider other)
+    {
+        if(turnsToReload == 0)
+        {
+            if(other.gameObject.tag == "Player")
+            {
+                turnsToReload = 5;
+             //   other.GetComponent<Ship>().getHit();
+               // Debug.Log("playerhit");
+            }
+        }
     }
 }

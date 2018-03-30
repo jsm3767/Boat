@@ -36,16 +36,17 @@ public class Ship : MonoBehaviour
     //protected bool hasActions;
 
     //Store turn's current actions
-    protected TurnDirection turnDirection = TurnDirection.None;
-    protected ShipSpeed shipSpeed = ShipSpeed.None;
-    protected LoadedCannon loadedCannon = LoadedCannon.None;
+    public TurnDirection turnDirection = TurnDirection.None;
+    public ShipSpeed shipSpeed = ShipSpeed.None;
+    public LoadedCannon loadedCannon = LoadedCannon.None;
 
     protected float TurnPlaySpeed = 2.0f; //In seconds, move to gamemanager
 
     protected float baseSpeed = 2.0f;
     public Collider leftCollider;
     public Collider rightCollider;
-
+    public int turnsToReload = 0;
+    public int health = 3;
     public bool HasActions
     {
         get
@@ -61,6 +62,45 @@ public class Ship : MonoBehaviour
                 return true;
             }
         }
+    }
+
+    public void setShipSpeed(int newSpeed)
+    {
+        if (newSpeed == 0)
+            shipSpeed = ShipSpeed.None;
+        if (newSpeed == 1)
+            shipSpeed = ShipSpeed.HalfMast;
+        if (newSpeed == 2)
+            shipSpeed = ShipSpeed.FullMast;
+    }
+
+    public void setTurnDirection(int newDirection)
+    {
+        if (newDirection == -2)
+            turnDirection = TurnDirection._90L;
+        if (newDirection == -1)
+            turnDirection = TurnDirection._45L;
+        if (newDirection == 0)
+            turnDirection = TurnDirection.None;
+        if (newDirection == 1)
+            turnDirection = TurnDirection._45R;
+        if (newDirection == 2)
+            turnDirection = TurnDirection._90R;
+    }
+
+    public void setRightFire()
+    {
+        loadedCannon = LoadedCannon.Right;
+    }
+
+    public void setLeftFire()
+    {
+        loadedCannon = LoadedCannon.Left;
+    }
+
+    public void setCancelFire()
+    {
+        loadedCannon = LoadedCannon.None;
     }
 
     //Movement/attack functions
@@ -104,7 +144,6 @@ public class Ship : MonoBehaviour
     //Called after moving forward and rotating
     private void ResetShip()
     {
-        Debug.Log(loadedCannon);
         shipSpeed = ShipSpeed.None;
         loadedCannon = LoadedCannon.None;
         turnDirection = TurnDirection.None;
@@ -166,6 +205,7 @@ public class Ship : MonoBehaviour
         {
             rightCollider.enabled = false;
             leftCollider.enabled = false;
+            StartCoroutine(Rotate());
             yield break;
         }
         switch (loadedCannon)
@@ -196,8 +236,13 @@ public class Ship : MonoBehaviour
     {
         //example usage of gamemanager
         //GameManager.Instance.SelectedShip
-        StartCoroutine(Fire());
-
+        if (turnsToReload == 0)
+            StartCoroutine(Fire());
+        else
+        {
+            turnsToReload--;
+            StartCoroutine(Rotate());
+        }
     }
 
     private void Start()
@@ -231,10 +276,37 @@ public class Ship : MonoBehaviour
         shipSpeed = (ShipSpeed)System.Enum.Parse(typeof(ShipSpeed), speed);
     }
 
-    void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Enemy")
-            Debug.Log("test");
+        if (turnsToReload == 0)
+        {
+            if (other.gameObject.tag == "Enemy")
+            {
+                other.GetComponent<EnemyShip>().getHit();
+                turnsToReload = 3;
+            }
+        }
     }
 
+    public void getHit()
+    {
+        health--;
+        if (health == 0)
+            Sink();
+    }
+    protected virtual void Sink()
+    {
+        Destroy(gameObject, 5);
+        if(gameObject.tag=="Player")
+            GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().RemovePlayerShipFromList(gameObject);
+        float t = 0.0f;
+        while (t < 1)
+        {
+            t += Time.deltaTime * (Time.timeScale / TurnPlaySpeed);
+            Vector3 startpos = gameObject.transform.position;
+            Vector3 endpos = startpos;
+            endpos.y -= 3;
+            transform.position = Vector3.Lerp(startpos, endpos, Mathf.SmoothStep(0.0f, 1, t));
+        }
+    }
 }
