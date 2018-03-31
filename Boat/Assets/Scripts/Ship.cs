@@ -291,7 +291,7 @@ public class Ship : MonoBehaviour
     public void getHit()
     {
         health--;
-        if (health == 0)
+        if (health <= 0)
             Sink();
     }
     protected virtual void Sink()
