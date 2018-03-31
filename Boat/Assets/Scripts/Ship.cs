@@ -47,6 +47,9 @@ public class Ship : MonoBehaviour
     public Collider rightCollider;
     public int turnsToReload = 0;
     public int health = 3;
+    public ParticleSystem leftsmoke;
+    public ParticleSystem rightsmoke;
+
     public bool HasActions
     {
         get
@@ -250,6 +253,8 @@ public class Ship : MonoBehaviour
         //TODO: remove
         //Debug testing things
 
+        leftsmoke.GetComponent<ParticleSystem>().enableEmission = false;
+        rightsmoke.GetComponent<ParticleSystem>().enableEmission = false;
 
         //turnDirection = (TurnDirection)Random.Range(0,4);
         //turnDirection = TurnDirection._45L;
@@ -282,10 +287,24 @@ public class Ship : MonoBehaviour
         {
             if (other.gameObject.tag == "Enemy")
             {
+                if (loadedCannon == LoadedCannon.Left)
+                    leftsmoke.GetComponent<ParticleSystem>().enableEmission = true;
+                else if (loadedCannon == LoadedCannon.Right)
+                    rightsmoke.GetComponent<ParticleSystem>().enableEmission = true;
+
                 other.GetComponent<EnemyShip>().getHit();
                 turnsToReload = 3;
+                StartCoroutine(stopSmoke());
             }
         }
+    }
+
+    IEnumerator stopSmoke()
+    {
+
+        yield return new WaitForSeconds(.4f);
+        leftsmoke.GetComponent<ParticleSystem>().enableEmission = false;
+        rightsmoke.GetComponent<ParticleSystem>().enableEmission = false;
     }
 
     public void getHit()

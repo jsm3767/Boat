@@ -103,16 +103,6 @@ public class EnemyShip : Ship
             if (Vector3.Distance(g.transform.position, this.transform.position) < dist)
             {
                 dist = Vector3.Distance(g.transform.position, this.transform.position);
-                if (dist < 4.0f && turnsToReload == 0)
-                {
-                    rightCollider.enabled = true;
-                    leftCollider.enabled = true;             
-                }
-                else
-                {
-                    rightCollider.enabled = false;
-                    leftCollider.enabled = false;
-                }
                 closest = g;
             }
         }
