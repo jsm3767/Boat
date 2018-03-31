@@ -34,7 +34,7 @@ public class CameraScript : MonoBehaviour
         }
 		if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved) {
 			Vector2 touchDeltaPosition = Input.GetTouch(0).deltaPosition;
-			transform.Translate(-touchDeltaPosition.x * speed * Time.deltaTime, -touchDeltaPosition.y * speed, 0);
+			transform.Translate(-touchDeltaPosition.x * speed * Time.deltaTime, 0, -touchDeltaPosition.y * speed * Time.deltaTime);
 		}
     }
 }
