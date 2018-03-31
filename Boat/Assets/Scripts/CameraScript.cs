@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraScript : MonoBehaviour
 {
     int cameraSpeed = 3;
-	public float speed = 0.1F;	
+	public float speed = 0.4f;	
     // Use this for initialization
     void Start()
     {
@@ -32,9 +32,16 @@ public class CameraScript : MonoBehaviour
         {
             transform.position += new Vector3(cameraSpeed * Time.deltaTime, 0,0);
         }
-		if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved) {
+
+		if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved)
+        {
 			Vector2 touchDeltaPosition = Input.GetTouch(0).deltaPosition;
-			transform.Translate(-touchDeltaPosition.x * speed * Time.deltaTime, -touchDeltaPosition.y * speed, 0);
+
+			transform.position += new Vector3(
+                -touchDeltaPosition.x * speed * Time.deltaTime, 
+                0.0f,
+                -touchDeltaPosition.y * speed * Time.deltaTime);
+
 		}
     }
 }

@@ -86,6 +86,35 @@ public class GameManager : Singleton<GameManager>
             WaveManager.Instance.SpawnWave();
         }
 
+        if ((Input.touchCount > 0) && (Input.GetTouch(0).phase == TouchPhase.Began)  )
+        {
+            Ray raycast = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
+            RaycastHit raycastHit;
+            if (Physics.Raycast(raycast, out raycastHit))
+            {
+                if (raycastHit.collider.name == "PlayerPrefab")
+                {
+                    GoToNext(raycastHit.collider.gameObject);
+                }
+                
+            }
+        }
+
+        
+        if(Input.GetMouseButtonDown(0))
+        {
+            Ray raycast = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit raycastHit;
+            if (Physics.Raycast(raycast, out raycastHit))
+            {
+                if (raycastHit.collider.tag == "Player")
+                {
+                    GoToNext(raycastHit.collider.gameObject);
+                }
+
+            }
+        }
+
     }
 
     public void DoTurn()
@@ -169,6 +198,20 @@ public class GameManager : Singleton<GameManager>
             new Vector3(GameManager.Instance.PlayerShips[currentIndex].transform.position.x,
             GameManager.Instance.CameraCurrentZoom,
             GameManager.Instance.PlayerShips[currentIndex].transform.position.z + GameManager.Instance.MoveToShipCameraZOffset)));
+
+    }
+    public void GoToNext(GameObject newShip)
+    {
+        //toggle old and new one
+        GameManager.Instance.SelectedShip.GetComponentInChildren<SelectionIndicator>().ToggleEnabled();
+        GameManager.Instance.selectedShip = newShip;
+        GameManager.Instance.SelectedShip.GetComponentInChildren<SelectionIndicator>().ToggleEnabled();
+
+        //start coroutine move camera
+        StartCoroutine(SmoothCameraMove(.3f,
+            new Vector3(newShip.transform.position.x,
+            GameManager.Instance.CameraCurrentZoom,
+            newShip.transform.position.z + GameManager.Instance.MoveToShipCameraZOffset)));
 
     }
 
