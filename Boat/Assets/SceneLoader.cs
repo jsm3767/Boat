@@ -9,14 +9,4 @@ public class SceneLoader : MonoBehaviour
     {
         SceneManager.LoadScene("Test2");
     }
-
-    public void ToMainMenu()
-    {
-        SceneManager.LoadScene("Menu");
-    }
-
-    public void QuitGame()
-    {
-        Application.Quit();
-    }
 }
