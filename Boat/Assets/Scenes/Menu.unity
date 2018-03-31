@@ -559,46 +559,12 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1281062072}
---- !u!1 &1355098022
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1355098024}
-  - component: {fileID: 1355098023}
-  m_Layer: 0
-  m_Name: SceneLoader
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1355098023
+--- !u!114 &1355098023 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1355098022}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
+  m_PrefabParentObject: {fileID: 114783450731065014, guid: c39e7a35a4550e4439ea984f4bc817e3,
+    type: 2}
+  m_PrefabInternal: {fileID: 1512270952}
   m_Script: {fileID: 11500000, guid: b5b9be153f4c20e45aae238dfbab78bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1355098024
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1355098022}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.1716542, y: 20.518417, z: 28.878263}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1445997792
 GameObject:
   m_ObjectHideFlags: 0
@@ -677,13 +643,13 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1355098023}
         m_MethodName: LoadScene
-        m_Mode: 1
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Test2
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
@@ -783,6 +749,48 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1512270952
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4690961329511006, guid: c39e7a35a4550e4439ea984f4bc817e3, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -2.1716542
+      objectReference: {fileID: 0}
+    - target: {fileID: 4690961329511006, guid: c39e7a35a4550e4439ea984f4bc817e3, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 20.518417
+      objectReference: {fileID: 0}
+    - target: {fileID: 4690961329511006, guid: c39e7a35a4550e4439ea984f4bc817e3, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 28.878263
+      objectReference: {fileID: 0}
+    - target: {fileID: 4690961329511006, guid: c39e7a35a4550e4439ea984f4bc817e3, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4690961329511006, guid: c39e7a35a4550e4439ea984f4bc817e3, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4690961329511006, guid: c39e7a35a4550e4439ea984f4bc817e3, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4690961329511006, guid: c39e7a35a4550e4439ea984f4bc817e3, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4690961329511006, guid: c39e7a35a4550e4439ea984f4bc817e3, type: 2}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: c39e7a35a4550e4439ea984f4bc817e3, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1789488421
 GameObject:
   m_ObjectHideFlags: 0
