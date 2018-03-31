@@ -12,6 +12,8 @@ public class EnemyShip : Ship
     // Use this for initialization
     void Start()
     {
+        leftsmoke.GetComponent<ParticleSystem>().enableEmission = false;
+        rightsmoke.GetComponent<ParticleSystem>().enableEmission = false;
         playerShipsOBJ = GameObject.FindGameObjectsWithTag("Player");
         turnDirection = TurnDirection.None;
         shipSpeed = ShipSpeed.FullMast;
@@ -47,6 +49,10 @@ public class EnemyShip : Ship
         float angleToRight = Mathf.Acos(Vector3.Dot(this.transform.right, toTarget) / toTarget.magnitude);
         if (angleToRight * Mathf.Rad2Deg < 90)
         {
+            if (shootTurn)
+            {
+                rightCollider.enabled = true;
+            }
             if (Mathf.Rad2Deg * angle < 90)
             {
                 turnDirection = TurnDirection._45R;
@@ -58,6 +64,11 @@ public class EnemyShip : Ship
         }
         else
         {
+
+            if (shootTurn)
+            {
+                leftCollider.enabled = true;
+            }
             if (Mathf.Rad2Deg * angle < 90)
             {
                 turnDirection = TurnDirection._45L;
