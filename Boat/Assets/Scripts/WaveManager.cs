@@ -40,7 +40,14 @@ public class WaveManager : Singleton<WaveManager>
     private Wave currentWave;
     public int waveIndex = 1;
 
-    List<GameObject> enemyShips;
+    private List<GameObject> enemyShips;
+    public List<GameObject> EnemyShips
+    {
+        get
+        {
+            return enemyShips;
+        }
+    }
 
     private int currentWaveEnemyCount;
 

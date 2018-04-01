@@ -67,7 +67,6 @@ public class GameManager : Singleton<GameManager>
     {
         playerShips = new List<GameObject>(GameObject.FindGameObjectsWithTag("Player"));
 
-
         selectedShip = playerShips[0];
         selectedShip.GetComponentInChildren<SelectionIndicator>().ToggleEnabled();
 
@@ -120,6 +119,10 @@ public class GameManager : Singleton<GameManager>
     public void DoTurn()
     {
         foreach (GameObject ship in playerShips)
+        {
+            ship.SendMessage("PlayTurn");
+        }
+        foreach (GameObject ship in WaveManager.Instance.EnemyShips)
         {
             ship.SendMessage("PlayTurn");
         }
