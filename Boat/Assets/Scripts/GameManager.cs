@@ -71,9 +71,13 @@ public class GameManager : Singleton<GameManager>
 
         selectedShip = playerShips[0];
         selectedShip.GetComponentInChildren<SelectionIndicator>().ToggleEnabled();
-
         speedSlider.onValueChanged.AddListener(delegate {setSelectedShipSpeed((int)speedSlider.value); });
         directionSlider.onValueChanged.AddListener(delegate {setSelectedShipDirection((int)directionSlider.value); });
+        
+        StartCoroutine(SmoothCameraMove(.3f,
+            new Vector3(selectedShip.transform.position.x,
+            GameManager.Instance.CameraCurrentZoom,
+            selectedShip.transform.position.z + GameManager.Instance.MoveToShipCameraZOffset)));
 
         WaveManager.Instance.SpawnWave();
     }
@@ -84,12 +88,6 @@ public class GameManager : Singleton<GameManager>
         if(selectedShip != null)
         {
             ammo.text = "Turns to reload: " + selectedShip.GetComponent<Ship>().TurnsToReload.ToString();
-        }
-
-        if (WaveManager.Instance.CountAliveShips() == 0)
-        {
-            WaveManager.Instance.waveIndex++;
-            WaveManager.Instance.SpawnWave();
         }
 
         if ((Input.touchCount > 0) && (Input.GetTouch(0).phase == TouchPhase.Began)  )

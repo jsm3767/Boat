@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraScript : MonoBehaviour
 {
     int cameraSpeed = 3;
-	public float speed = 0.4f;	
+	public float speed = 1f;	
     // Use this for initialization
     void Start()
     {

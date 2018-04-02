@@ -9,4 +9,9 @@ public class SceneLoader : MonoBehaviour
     {
         SceneManager.LoadScene("Test2");
     }
+
+    public void LoadScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+    }
 }

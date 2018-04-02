@@ -269,7 +269,6 @@ public class Ship : MonoBehaviour
     {
         //TODO: remove
         //Debug testing things
-
         healthBar = GetComponentInChildren<Image>();
 
         leftsmoke.GetComponent<ParticleSystem>().enableEmission = false;

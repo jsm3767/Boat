@@ -32,6 +32,8 @@ public struct WaveEnemy
 
 public class WaveManager : Singleton<WaveManager>
 {
+    protected WaveManager() { }
+
     public GameObject spawnParent;
     public GameObject BasicEnemy;
 
@@ -85,12 +87,11 @@ public class WaveManager : Singleton<WaveManager>
     //Other classes can call spawnwave alone
     private void LoadWaveFromJSON(int index)
     {
-        using (StreamReader stream = new StreamReader("Assets/Resources/Waves/" + index))
-        {
-            string json = stream.ReadToEnd();
-            currentWave = JsonUtility.FromJson<Wave>(json);
-            currentWaveEnemyCount = currentWave.enemies.Length;
-        }
+        TextAsset textAsset = Resources.Load<TextAsset>("Waves/" + index.ToString());
+        Debug.Log(textAsset.text);
+        string json = textAsset.text;
+        currentWave = JsonUtility.FromJson<Wave>(json);
+        currentWaveEnemyCount = currentWave.enemies.Length;
     }
 
     //creates a JSON file holding level data 
