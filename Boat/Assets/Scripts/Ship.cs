@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum TurnDirection
 {
@@ -47,8 +48,11 @@ public class Ship : MonoBehaviour
     public Collider rightCollider;
     public int turnsToReload = 0;
     public int health = 3;
+    public int maxHealth = 3;
     public ParticleSystem leftsmoke;
     public ParticleSystem rightsmoke;
+
+    protected Image healthBar;
 
     public bool HasActions
     {
@@ -64,6 +68,14 @@ public class Ship : MonoBehaviour
             {
                 return true;
             }
+        }
+    }
+
+    public int TurnsToReload
+    {
+        get
+        {
+            return turnsToReload;
         }
     }
 
@@ -104,6 +116,11 @@ public class Ship : MonoBehaviour
     public void setCancelFire()
     {
         loadedCannon = LoadedCannon.None;
+    }
+
+    protected virtual void Update()
+    {
+        healthBar.gameObject.GetComponent<RectTransform>().localScale = new Vector3( ((float)health / (float)maxHealth), 1.0f, 1.0f);
     }
 
     //Movement/attack functions
@@ -252,6 +269,8 @@ public class Ship : MonoBehaviour
     {
         //TODO: remove
         //Debug testing things
+
+        healthBar = GetComponentInChildren<Image>();
 
         leftsmoke.GetComponent<ParticleSystem>().enableEmission = false;
         rightsmoke.GetComponent<ParticleSystem>().enableEmission = false;

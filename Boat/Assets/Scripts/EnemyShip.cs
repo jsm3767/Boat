@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyShip : Ship
 {
@@ -15,6 +16,8 @@ public class EnemyShip : Ship
         playerShipsOBJ = GameObject.FindGameObjectsWithTag("Player");
         turnDirection = TurnDirection.None;
         shipSpeed = ShipSpeed.FullMast;
+        healthBar = GetComponentInChildren<Image>();
+
     }
 
     //If I'm correct we don't have to recalculate every frame so just moved this to playturn instead of 
@@ -88,11 +91,6 @@ public class EnemyShip : Ship
         StartCoroutine(Rotate());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     private GameObject findClosestPlayer()
     {

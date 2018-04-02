@@ -24,6 +24,8 @@ public class GameManager : Singleton<GameManager>
     public Slider speedSlider;
     public Slider directionSlider;
     private bool ignorechanges = false;
+
+    public Text ammo;
    
     public float CameraCurrentZoom
     {
@@ -79,6 +81,11 @@ public class GameManager : Singleton<GameManager>
     // Update is called once per frame
     void Update()
     {
+        if(selectedShip != null)
+        {
+            ammo.text = "Turns to reload: " + selectedShip.GetComponent<Ship>().TurnsToReload.ToString();
+        }
+
         if (WaveManager.Instance.CountAliveShips() == 0)
         {
             WaveManager.Instance.waveIndex++;

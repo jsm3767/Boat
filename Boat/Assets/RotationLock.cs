@@ -5,13 +5,14 @@ using UnityEngine;
 public class RotationLock : MonoBehaviour {
 
     Quaternion rotation;
+    Canvas canvas;
     void Awake()
     {
-        transform.rotation = Quaternion.Euler( 75, 0, 0 );
-        rotation = transform.rotation;
+        canvas = GetComponent<Canvas>();
+        canvas.transform.rotation = Quaternion.Euler(30, 0, 0);
     }
-    void LateUpdate()
+    void Update()
     {
-        transform.rotation = rotation;
+        canvas.transform.rotation = Quaternion.Euler(30, 0, 0);
     }
 }
